@@ -7,8 +7,8 @@ export default function Footer() {
 
   return (
     <footer className="bg-ink text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <div>
             <div className="flex items-center gap-3 mb-6">
               <div className="w-12 h-12 bg-white text-ink flex items-center justify-center font-display font-bold text-2xl rounded-sm">
@@ -149,7 +149,7 @@ export default function Footer() {
           <p className="text-gray-500 text-sm text-center md:text-left">
             &copy; {year} Sarıtaş Dekorasyon Ürünleri. Tüm hakları saklıdır.
           </p>
-          <div className="flex gap-4 items-center">
+          <div className="flex max-w-full flex-wrap items-center justify-center gap-4">
             <Image
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png"
               alt="PayPal"

@@ -10,12 +10,12 @@ const features = [
 export default function Features() {
   return (
     <div className="bg-white border-y border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="grid grid-cols-1 gap-6 divide-y divide-gray-100 sm:grid-cols-2 sm:gap-8 sm:divide-x sm:divide-y-0 lg:grid-cols-4 lg:gap-12">
           {features.map((feature, index) => (
             <div
               key={index}
-              className="flex flex-col items-center text-center pt-8 sm:pt-0 first:pt-0 px-4"
+              className="flex flex-col items-center px-2 pt-6 text-center first:pt-0 sm:px-4 sm:pt-0"
             >
               <div className="w-14 h-14 bg-paper rounded-full flex items-center justify-center mb-4 border border-gold/20">
                 <feature.icon className="w-6 h-6 text-gold" />

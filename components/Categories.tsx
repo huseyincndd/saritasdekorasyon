@@ -26,22 +26,22 @@ const categories = [
 
 export default function Categories() {
   return (
-    <div className="bg-paper py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center mb-12">
-          <span className="text-gold font-medium tracking-widest uppercase text-sm mb-3">
+    <div className="bg-paper py-12 sm:py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-8 flex flex-col items-center text-center sm:mb-12">
+          <span className="mb-2 text-xs font-medium tracking-widest text-gold uppercase sm:mb-3 sm:text-sm">
             Koleksiyonlar
           </span>
-          <h2 className="text-4xl font-display font-bold text-ink">Kategorileri Keşfedin</h2>
-          <div className="w-24 h-[1px] bg-gold mt-6" />
+          <h2 className="font-display text-3xl font-bold text-ink sm:text-4xl">Kategorileri Keşfedin</h2>
+          <div className="mt-4 h-[1px] w-24 bg-gold sm:mt-6" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-4 lg:gap-8">
           {categories.map((category, idx) => (
             <Link
               key={idx}
               href="/products"
-              className="group relative block h-96 overflow-hidden rounded-sm shadow-md outline-none focus-visible:ring-2 focus-visible:ring-gold"
+              className="group relative block h-64 overflow-hidden rounded-sm shadow-md outline-none focus-visible:ring-2 focus-visible:ring-gold sm:h-80 md:h-96"
             >
               <Image
                 src={category.imageSrc}

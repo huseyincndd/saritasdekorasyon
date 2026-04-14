@@ -28,32 +28,34 @@ export default function ProductDetailView({ product }: Props) {
   }, [product.id]);
 
   return (
-    <div className="bg-paper min-h-screen py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
+    <div className="bg-paper min-h-screen py-6 sm:py-8 md:py-12">
+      <div className="mx-auto max-w-7xl min-w-0 px-3 sm:px-6 lg:px-8">
+        <div className="mb-6 flex min-w-0 flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between">
           <Link
-            href="/"
-            className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gold transition-colors"
+            href="/products"
+            className="inline-flex min-w-0 items-center text-sm font-medium text-gray-500 hover:text-gold transition-colors"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Ana Sayfaya Dön
+            <ArrowLeft className="mr-2 h-4 w-4 shrink-0" />
+            <span className="truncate">Ürünlere dön</span>
           </Link>
-          <div className="hidden sm:flex items-center text-sm text-gray-400">
-            <Link href="/" className="hover:text-gold transition-colors">
+          <div className="hidden min-w-0 items-center text-sm text-gray-400 sm:flex">
+            <Link href="/" className="shrink-0 hover:text-gold transition-colors">
               Ana Sayfa
             </Link>
-            <span className="mx-2">/</span>
-            <Link href="/products" className="hover:text-gold transition-colors">
+            <span className="mx-2 shrink-0">/</span>
+            <Link href="/products" className="min-w-0 truncate hover:text-gold transition-colors">
               {product.category}
             </Link>
-            <span className="mx-2">/</span>
-            <span className="text-ink truncate max-w-[200px]">{product.name}</span>
+            <span className="mx-2 shrink-0">/</span>
+            <span className="max-w-[min(40vw,12rem)] truncate text-ink md:max-w-[200px]">
+              {product.name}
+            </span>
           </div>
         </div>
 
-        <div className="bg-white rounded-sm shadow-xl border border-gray-100 overflow-hidden">
+        <div className="overflow-hidden rounded-sm border border-gray-100 bg-white shadow-xl">
           <div className="flex flex-col lg:flex-row">
-            <div className="lg:w-1/2 p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-gray-100">
+            <div className="border-b border-gray-100 p-4 sm:p-8 lg:w-1/2 lg:border-r lg:border-b-0 lg:p-10">
               <div className="relative aspect-[4/3] sm:aspect-square rounded-sm overflow-hidden mb-6 bg-gray-50">
                 <Image
                   src={product.images[activeImage] ?? product.imageSrc}
@@ -69,7 +71,7 @@ export default function ProductDetailView({ product }: Props) {
                   </div>
                 )}
               </div>
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4">
                 {product.images.map((img, idx) => (
                   <button
                     key={idx}
@@ -93,7 +95,7 @@ export default function ProductDetailView({ product }: Props) {
               </div>
             </div>
 
-            <div className="lg:w-1/2 p-6 sm:p-10 flex flex-col">
+            <div className="flex flex-col p-4 sm:p-8 lg:w-1/2 lg:p-10">
               <div className="mb-2 flex items-center justify-between">
                 <span className="text-gold font-medium tracking-widest uppercase text-xs">
                   {product.category}
@@ -185,7 +187,7 @@ export default function ProductDetailView({ product }: Props) {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+        <div className="mt-8 grid min-w-0 grid-cols-1 gap-4 sm:mt-12 sm:grid-cols-3 sm:gap-6">
           <div className="bg-white p-6 rounded-sm border border-gray-100 flex items-center gap-4 shadow-sm">
             <div className="w-12 h-12 bg-paper rounded-full flex items-center justify-center shrink-0">
               <Truck className="w-6 h-6 text-gold" />

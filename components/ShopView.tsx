@@ -27,22 +27,46 @@ export default function ShopView() {
       : PRODUCTS.filter((p) => p.category === activeCategory);
 
   return (
-    <div className="bg-paper min-h-screen py-8 sm:py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center text-sm text-gray-400 mb-8">
-          <Link href="/" className="hover:text-gold transition-colors">
+    <div className="bg-paper min-h-screen py-6 sm:py-8 md:py-12">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+        <div className="mb-6 flex items-center text-xs text-gray-400 sm:mb-8 sm:text-sm">
+          <Link href="/" className="shrink-0 hover:text-gold transition-colors">
             Ana Sayfa
           </Link>
-          <ChevronRight className="w-4 h-4 mx-2" />
-          <span className="text-ink">Koleksiyonlar</span>
+          <ChevronRight className="mx-1.5 h-4 w-4 shrink-0 sm:mx-2" />
+          <span className="min-w-0 truncate text-ink">Koleksiyonlar</span>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          <div className="w-full lg:w-1/4">
-            <div className="bg-white p-6 rounded-sm border border-gray-200 sticky top-32 shadow-sm">
-              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-100">
-                <Filter className="w-5 h-5 text-gold" />
-                <h2 className="font-display font-bold text-lg text-ink">Kategoriler</h2>
+        {/* Mobil: yatay kaydırmalı kategori şeridi */}
+        <div className="mb-6 lg:hidden">
+          <p className="mb-2 text-xs font-medium uppercase tracking-wide text-gray-500">
+            Kategori
+          </p>
+          <div className="scrollbar-hide -mx-3 flex snap-x snap-mandatory gap-2 overflow-x-auto px-3 pb-1">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(cat)}
+                className={`snap-start shrink-0 rounded-full border px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-all ${
+                  activeCategory === cat
+                    ? "border-ink bg-ink text-gold shadow-md"
+                    : "border-gray-200 bg-white text-gray-700 hover:border-gold"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-8 lg:flex-row lg:gap-12">
+          {/* Masaüstü: yan panel */}
+          <div className="hidden w-full lg:block lg:w-1/4">
+            <div className="sticky top-28 rounded-sm border border-gray-200 bg-white p-6 shadow-sm">
+              <div className="mb-6 flex items-center gap-2 border-b border-gray-100 pb-4">
+                <Filter className="h-5 w-5 text-gold" />
+                <h2 className="font-display text-lg font-bold text-ink">Kategoriler</h2>
               </div>
               <ul className="space-y-2">
                 {categories.map((cat) => (
@@ -50,14 +74,14 @@ export default function ShopView() {
                     <button
                       type="button"
                       onClick={() => setActiveCategory(cat)}
-                      className={`w-full text-left flex items-center justify-between py-2.5 px-3 rounded-sm text-sm transition-all ${
+                      className={`flex w-full items-center justify-between rounded-sm px-3 py-2.5 text-left text-sm transition-all ${
                         activeCategory === cat
-                          ? "bg-ink text-gold font-medium shadow-md"
+                          ? "bg-ink font-medium text-gold shadow-md"
                           : "text-gray-600 hover:bg-paper hover:text-ink"
                       }`}
                     >
                       {cat}
-                      {activeCategory === cat && <ChevronRight className="w-4 h-4" />}
+                      {activeCategory === cat && <ChevronRight className="h-4 w-4" />}
                     </button>
                   </li>
                 ))}
@@ -65,60 +89,62 @@ export default function ShopView() {
             </div>
           </div>
 
-          <div className="w-full lg:w-3/4">
-            <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <h1 className="text-3xl font-display font-bold text-ink">{activeCategory}</h1>
-              <span className="text-sm text-gray-500 font-medium bg-white px-4 py-2 rounded-sm border border-gray-200 shadow-sm">
+          <div className="min-w-0 w-full lg:w-3/4">
+            <div className="mb-6 flex flex-col gap-3 sm:mb-8 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+              <h1 className="font-display text-2xl font-bold text-ink sm:text-3xl">
+                {activeCategory}
+              </h1>
+              <span className="inline-flex w-fit items-center rounded-sm border border-gray-200 bg-white px-3 py-2 text-xs font-medium text-gray-500 shadow-sm sm:text-sm">
                 {filteredProducts.length} ürün listeleniyor
               </span>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
               {filteredProducts.map((product) => (
                 <div
                   key={product.id}
-                  className="bg-white border border-gray-200 rounded-sm overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col"
+                  className="group flex flex-col overflow-hidden rounded-sm border border-gray-200 bg-white transition-all duration-300 hover:shadow-2xl"
                 >
                   <Link
                     href={`/product/${product.id}`}
-                    className="relative aspect-[4/3] bg-gray-100 overflow-hidden block"
+                    className="relative block aspect-[4/3] overflow-hidden bg-gray-100"
                   >
                     <Image
                       src={product.imageSrc}
                       alt={product.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                     {product.isNew && (
-                      <div className="absolute top-4 left-4 bg-gold text-white text-[10px] font-bold px-3 py-1.5 uppercase tracking-widest rounded-sm shadow-sm z-10">
+                      <div className="absolute top-3 left-3 z-10 rounded-sm bg-gold px-2.5 py-1 text-[10px] font-bold tracking-widest text-white uppercase shadow-sm sm:top-4 sm:left-4 sm:px-3 sm:py-1.5">
                         Yeni
                       </div>
                     )}
                   </Link>
-                  <div className="p-5 flex flex-col flex-grow text-center">
-                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">
+                  <div className="flex flex-grow flex-col p-4 text-center sm:p-5">
+                    <p className="mb-1.5 text-[10px] tracking-widest text-gray-400 uppercase sm:mb-2 sm:text-xs">
                       {product.category}
                     </p>
                     <Link
                       href={`/product/${product.id}`}
                       className="hover:text-gold transition-colors"
                     >
-                      <h3 className="text-base font-display font-bold text-ink mb-3 line-clamp-2 min-h-[3rem]">
+                      <h3 className="font-display line-clamp-2 min-h-[2.75rem] text-base font-bold text-ink sm:min-h-[3rem]">
                         {product.name}
                       </h3>
                     </Link>
-                    <div className="mt-auto mb-5">
-                      <span className="text-xl font-bold text-ink">{product.price}</span>
+                    <div className="mt-auto mb-4">
+                      <span className="text-lg font-bold text-ink sm:text-xl">{product.price}</span>
                     </div>
                     <button
                       type="button"
                       onClick={(e) => {
                         e.preventDefault();
                       }}
-                      className="w-full bg-paper border border-gray-200 text-ink py-3 rounded-sm font-medium text-sm flex items-center justify-center gap-2 group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-colors"
+                      className="flex w-full items-center justify-center gap-2 rounded-sm border border-gray-200 bg-paper py-2.5 text-sm font-medium text-ink transition-colors group-hover:border-gold group-hover:bg-gold group-hover:text-white sm:py-3"
                     >
-                      <ShoppingCart className="w-4 h-4" />
+                      <ShoppingCart className="h-4 w-4" />
                       Sepete Ekle
                     </button>
                   </div>
@@ -127,7 +153,7 @@ export default function ShopView() {
             </div>
 
             {filteredProducts.length === 0 && (
-              <div className="text-center py-20 text-gray-500 font-medium bg-white border border-gray-200 rounded-sm shadow-sm">
+              <div className="rounded-sm border border-gray-200 bg-white py-16 text-center font-medium text-gray-500 shadow-sm sm:py-20">
                 Bu kategoride henüz ürün bulunmamaktadır.
               </div>
             )}

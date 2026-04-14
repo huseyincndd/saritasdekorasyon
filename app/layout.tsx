@@ -33,9 +33,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr" className={`${inter.variable} ${playfair.variable} h-full`}>
-      <body className="min-h-screen flex flex-col font-sans bg-paper text-ink antialiased">
+      <body className="min-h-screen min-w-0 flex flex-col overflow-x-clip font-sans bg-paper text-ink antialiased">
         <Navbar />
-        <main className="flex-grow">{children}</main>
+        <main className="min-w-0 flex-grow">{children}</main>
         <Footer />
       </body>
     </html>

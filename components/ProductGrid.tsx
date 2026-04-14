@@ -14,34 +14,36 @@ export default function ProductGrid() {
     activeTab === "Tümü" ? PRODUCTS : PRODUCTS.filter((p) => p.category === activeTab);
 
   return (
-    <div className="bg-white py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="bg-white py-12 sm:py-16 md:py-20">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center text-center mb-12">
           <span className="text-gold font-medium tracking-widest uppercase text-sm mb-3">
             Seçkin Ürünler
           </span>
-          <h2 className="text-4xl font-display font-bold text-ink">Öne Çıkanlar</h2>
-          <div className="w-24 h-[1px] bg-gold mt-6 mb-10" />
+          <h2 className="text-3xl font-display font-bold text-ink sm:text-4xl">Öne Çıkanlar</h2>
+          <div className="w-24 h-[1px] bg-gold mt-6 mb-6 sm:mb-10" />
 
-          <div className="flex flex-wrap justify-center gap-3">
-            {tabs.map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-2.5 rounded-sm text-sm font-medium transition-all border ${
-                  activeTab === tab
-                    ? "bg-ink text-white border-ink shadow-md"
-                    : "bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold"
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
+          <div className="w-full max-w-full">
+            <div className="scrollbar-hide -mx-4 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:justify-center sm:gap-3 sm:overflow-visible sm:px-0 sm:pb-0">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  type="button"
+                  onClick={() => setActiveTab(tab)}
+                  className={`shrink-0 snap-start rounded-sm border px-4 py-2.5 text-sm font-medium whitespace-nowrap transition-all sm:px-6 ${
+                    activeTab === tab
+                      ? "border-ink bg-ink text-white shadow-md"
+                      : "border-gray-200 bg-white text-gray-600 hover:border-gold hover:text-gold"
+                  }`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4">
           {filteredProducts.map((product) => (
             <div
               key={product.id}
