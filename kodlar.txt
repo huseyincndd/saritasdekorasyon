@@ -1,0 +1,928 @@
+app.tsx:
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import ProductDetail from './pages/ProductDetail';
+import Shop from './pages/Shop';
+
+export default function App() {
+  return (
+    <Router>
+      <div className="min-h-screen flex flex-col font-sans bg-paper">
+        <Navbar />
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/products" element={<Shop />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
+    </Router>
+  );
+}
+
+
+components klasörü altında:
+
+Categories.tsx:
+const categories = [
+  { name: 'Duvar Panelleri', imageSrc: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  { name: 'Zemin Kaplama', imageSrc: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  { name: 'Tavan Çözümleri', imageSrc: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+  { name: 'Lambiri Çeşitleri', imageSrc: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80' },
+];
+
+export default function Categories() {
+  return (
+    <div className="bg-paper py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center text-center mb-12">
+          <span className="text-gold font-medium tracking-widest uppercase text-sm mb-3">Koleksiyonlar</span>
+          <h2 className="text-4xl font-display font-bold text-ink">Kategorileri Keşfedin</h2>
+          <div className="w-24 h-[1px] bg-gold mt-6"></div>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {categories.map((category, idx) => (
+            <a key={idx} href="#" className="group relative block h-96 overflow-hidden rounded-sm shadow-md">
+              <img 
+                src={category.imageSrc} 
+                alt={category.name} 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                referrerPolicy="no-referrer" 
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-80 group-hover:opacity-90 transition-opacity"></div>
+              <div className="absolute bottom-0 left-0 w-full p-8 flex flex-col items-center text-center transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                <h3 className="font-display font-bold text-2xl text-white mb-3">{category.name}</h3>
+                <span className="text-gold text-sm font-medium uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                  İncele &rarr;
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+Features.tsx:
+import { ShieldCheck, Truck, Wrench, ThumbsUp } from 'lucide-react';
+
+const features = [
+  { name: '1. Sınıf Kalite', desc: 'Uzun ömürlü ve dayanıklı malzemeler', icon: ShieldCheck },
+  { name: 'Güvenli Teslimat', desc: 'Türkiye\'nin her yerine sigortalı kargo', icon: Truck },
+  { name: 'Kolay Kurulum', desc: 'Ustaya ihtiyaç duymadan pratik montaj', icon: Wrench },
+  { name: 'Müşteri Destek', desc: 'Satış sonrası kesintisiz hizmet', icon: ThumbsUp },
+];
+
+export default function Features() {
+  return (
+    <div className="bg-white border-y border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+          {features.map((feature, index) => (
+            <div key={index} className="flex flex-col items-center text-center pt-8 sm:pt-0 first:pt-0 px-4">
+              <div className="w-14 h-14 bg-paper rounded-full flex items-center justify-center mb-4 border border-gold/20">
+                <feature.icon className="w-6 h-6 text-gold" />
+              </div>
+              <h3 className="text-lg font-display font-bold text-ink mb-2">{feature.name}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed">{feature.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+Footer.tsx:
+import { Facebook, Instagram, Twitter, MapPin, Phone, Mail } from 'lucide-react';
+
+export default function Footer() {
+  return (
+    <footer className="bg-ink text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-white text-ink flex items-center justify-center font-display font-bold text-2xl rounded-sm">
+                S
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display font-bold text-2xl leading-none tracking-tight text-white">SARITAŞ</span>
+                <span className="text-[11px] uppercase tracking-[0.2em] text-gray-400 font-medium mt-1">Dekorasyon</span>
+              </div>
+            </div>
+            <p className="text-gray-400 text-sm leading-relaxed mb-6">
+              Yapı malzemeleri, PVC panel ve lambiri çözümlerinde sektörün öncü markası. Lüksü ve kaliteyi yaşam alanlarınıza taşıyoruz.
+            </p>
+            <div className="flex space-x-4">
+              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                <span className="sr-only">Facebook</span>
+                <Facebook className="h-6 w-6" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                <span className="sr-only">Instagram</span>
+                <Instagram className="h-6 w-6" />
+              </a>
+              <a href="#" className="text-gray-400 hover:text-gold transition-colors">
+                <span className="sr-only">Twitter</span>
+                <Twitter className="h-6 w-6" />
+              </a>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="font-display font-bold text-lg mb-6 text-gold">Hızlı Linkler</h3>
+            <ul className="space-y-4">
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Hakkımızda</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Ürünlerimiz</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Sıkça Sorulan Sorular</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Kargo ve Teslimat</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">İade Şartları</a></li>
+            </ul>
+          </div>
+
+          {/* Categories */}
+          <div>
+            <h3 className="font-display font-bold text-lg mb-6 text-gold">Kategoriler</h3>
+            <ul className="space-y-4">
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Duvar Panelleri</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Zemin Kaplama</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Tavan Çözümleri</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Lambiri Çeşitleri</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-gold transition-colors text-sm">Aksesuarlar</a></li>
+            </ul>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="font-display font-bold text-lg mb-6 text-gold">İletişim</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3 text-gray-400 text-sm">
+                <MapPin className="h-5 w-5 text-gold shrink-0" />
+                <span>Organize Sanayi Bölgesi, 1. Cadde No: 45<br />Merkez / Türkiye</span>
+              </li>
+              <li className="flex items-center gap-3 text-gray-400 text-sm">
+                <Phone className="h-5 w-5 text-gold shrink-0" />
+                <span>+90 (850) 123 45 67</span>
+              </li>
+              <li className="flex items-center gap-3 text-gray-400 text-sm">
+                <Mail className="h-5 w-5 text-gold shrink-0" />
+                <span>info@saritasdekorasyon.com</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      
+      {/* Bottom bar */}
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-gray-500 text-sm text-center md:text-left">
+            &copy; {new Date().getFullYear()} Sarıtaş Dekorasyon Ürünleri. Tüm hakları saklıdır.
+          </p>
+          <div className="flex gap-4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/PayPal.svg/1200px-PayPal.svg.png" alt="PayPal" className="h-6 opacity-50 grayscale hover:grayscale-0 transition-all" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1200px-Mastercard-logo.svg.png" alt="Mastercard" className="h-6 opacity-50 grayscale hover:grayscale-0 transition-all" referrerPolicy="no-referrer" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" alt="Visa" className="h-6 opacity-50 grayscale hover:grayscale-0 transition-all" referrerPolicy="no-referrer" />
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+
+Hero.tsx:
+import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+export default function Hero() {
+  return (
+    <div className="bg-paper py-8 sm:py-12 lg:py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative rounded-sm overflow-hidden shadow-2xl">
+          <div className="absolute inset-0">
+            <img 
+              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" 
+              alt="Lüks İç Mekan" 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gray-900/50 mix-blend-multiply"></div>
+          </div>
+          
+          <div className="relative z-10 px-6 py-16 sm:px-12 sm:py-24 lg:px-20 lg:py-32 max-w-3xl">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <span className="w-12 h-[1px] bg-gold"></span>
+              <span className="text-gold font-medium tracking-widest uppercase text-sm">Premium Koleksiyon</span>
+            </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white leading-tight mb-6 text-shadow-sm">
+              Evinize Değer Katan <br/>
+              <span className="italic font-light text-gold">Lüks Dokunuşlar</span>
+            </h1>
+            <p className="text-lg text-gray-100 mb-10 max-w-xl font-light leading-relaxed">
+              Birinci sınıf malzemeler ve kusursuz işçilikle üretilen duvar panellerimizle, yaşam alanlarınızı prestijli bir görünüme kavuşturun.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/products" className="bg-gold hover:bg-gold-dark text-white px-8 py-4 rounded-sm font-medium text-lg transition-colors flex items-center justify-center gap-2 shadow-lg">
+                Ürünleri İncele
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+              <button className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-sm font-medium text-lg transition-colors flex items-center justify-center">
+                Kataloğu İndir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
+Navbar.tsx:
+import { ShoppingCart, Search, User, Menu } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+export default function Navbar() {
+  return (
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-200 shadow-sm">
+      {/* Top Banner */}
+      <div className="bg-ink text-white py-2.5 px-4 text-center text-xs sm:text-sm font-medium tracking-wide">
+        <span className="text-gold">📦 Türkiye Geneline</span> Hızlı ve Güvenli Teslimat
+      </div>
+
+      {/* Main Navbar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-24">
+          {/* Logo */}
+          <Link to="/" className="flex-shrink-0 flex items-center gap-3 cursor-pointer">
+            <div className="w-12 h-12 bg-ink text-gold flex items-center justify-center font-display font-bold text-2xl rounded-sm">
+              S
+            </div>
+            <div className="flex flex-col">
+              <span className="font-display font-bold text-2xl leading-none tracking-tight text-ink">SARITAŞ</span>
+              <span className="text-[11px] uppercase tracking-[0.2em] text-gray-500 font-medium mt-1">Dekorasyon</span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex space-x-8">
+            <Link to="/products" className="text-sm font-medium text-ink hover:text-gold transition-colors">Tüm Ürünler</Link>
+            <Link to="/products" className="text-sm font-medium text-ink hover:text-gold transition-colors">Duvar Panelleri</Link>
+            <Link to="/products" className="text-sm font-medium text-ink hover:text-gold transition-colors">Zemin Kaplama</Link>
+            <Link to="/products" className="text-sm font-medium text-ink hover:text-gold transition-colors">Tavan Çözümleri</Link>
+          </nav>
+
+          {/* Icons / Actions */}
+          <div className="flex items-center space-x-4 sm:space-x-6">
+            <button className="text-ink hover:text-gold transition-colors flex items-center gap-2">
+              <Search className="w-5 h-5" />
+              <span className="hidden lg:block text-sm font-medium">Ara</span>
+            </button>
+            <button className="text-ink hover:text-gold transition-colors hidden sm:flex items-center gap-2">
+              <User className="w-5 h-5" />
+              <span className="hidden lg:block text-sm font-medium">Giriş Yap</span>
+            </button>
+            <button className="flex items-center gap-2 bg-paper border border-gray-200 px-4 py-2 rounded-sm hover:border-gold transition-colors group">
+              <ShoppingCart className="w-5 h-5 text-ink group-hover:text-gold transition-colors" />
+              <span className="text-sm font-medium text-ink">Sepetim</span>
+              <span className="bg-gold text-white text-xs font-bold px-2 py-0.5 rounded-full ml-1">
+                0
+              </span>
+            </button>
+            <button className="md:hidden text-ink">
+              <Menu className="w-6 h-6" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+
+ProductGrid.tsx:
+import { useState } from 'react';
+import { ShoppingCart } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const products = [
+  {
+    id: 1,
+    name: 'Ahşap Görünümlü PVC Duvar Paneli',
+    category: 'Duvar Panelleri',
+    price: '245,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1511401139252-f158d3209c17?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: true,
+  },
+  {
+    id: 2,
+    name: 'Mermer Desenli UV Panel',
+    category: 'Duvar Panelleri',
+    price: '320,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 3,
+    name: 'Antrasit Gri PVC Lambiri',
+    category: 'Lambiri',
+    price: '185,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 4,
+    name: 'Beyaz Parlak Tavan Paneli',
+    category: 'Tavan Çözümleri',
+    price: '150,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: true,
+  },
+  {
+    id: 5,
+    name: 'Ceviz Desenli Zemin Kaplama',
+    category: 'Zemin Kaplama',
+    price: '410,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 6,
+    name: 'Akustik Ahşap Duvar Paneli',
+    category: 'Duvar Panelleri',
+    price: '550,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: true,
+  },
+  {
+    id: 7,
+    name: 'Siyah Mat PVC Lambiri',
+    category: 'Lambiri',
+    price: '195,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 8,
+    name: 'Altın Çıtalı Duvar Paneli',
+    category: 'Duvar Panelleri',
+    price: '380,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+];
+
+export default function ProductGrid() {
+  const [activeTab, setActiveTab] = useState('Tümü');
+  const tabs = ['Tümü', 'Duvar Panelleri', 'Lambiri', 'Zemin Kaplama', 'Tavan Çözümleri'];
+
+  const filteredProducts = activeTab === 'Tümü' 
+    ? products 
+    : products.filter(p => p.category === activeTab);
+
+  return (
+    <div className="bg-white py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-center text-center mb-12">
+          <span className="text-gold font-medium tracking-widest uppercase text-sm mb-3">Seçkin Ürünler</span>
+          <h2 className="text-4xl font-display font-bold text-ink">Öne Çıkanlar</h2>
+          <div className="w-24 h-[1px] bg-gold mt-6 mb-10"></div>
+          
+          {/* Tabs */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {tabs.map(tab => (
+              <button 
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                className={`px-6 py-2.5 rounded-sm text-sm font-medium transition-all border ${
+                  activeTab === tab 
+                    ? 'bg-ink text-white border-ink shadow-md' 
+                    : 'bg-white text-gray-600 border-gray-200 hover:border-gold hover:text-gold'
+                }`}
+              >
+                {tab}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {filteredProducts.map((product) => (
+            <div key={product.id} className="bg-white border border-gray-200 rounded-sm overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col">
+              <Link to={`/product/${product.id}`} className="relative aspect-[4/3] bg-gray-100 overflow-hidden block">
+                <img
+                  src={product.imageSrc}
+                  alt={product.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  referrerPolicy="no-referrer"
+                />
+                {product.isNew && (
+                  <div className="absolute top-4 left-4 bg-gold text-white text-[10px] font-bold px-3 py-1.5 uppercase tracking-widest rounded-sm shadow-sm">
+                    Yeni
+                  </div>
+                )}
+              </Link>
+              <div className="p-6 flex flex-col flex-grow text-center">
+                <p className="text-xs text-gray-400 uppercase tracking-widest mb-3">{product.category}</p>
+                <Link to={`/product/${product.id}`} className="hover:text-gold transition-colors">
+                  <h3 className="text-lg font-display font-bold text-ink mb-4 line-clamp-2 min-h-[3.5rem]">
+                    {product.name}
+                  </h3>
+                </Link>
+                <div className="mt-auto mb-6">
+                  <span className="text-2xl font-bold text-ink">{product.price}</span>
+                </div>
+                <button 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    // Add to cart logic here
+                  }}
+                  className="w-full bg-paper border border-gray-200 text-ink py-3.5 rounded-sm font-medium flex items-center justify-center gap-2 group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-colors"
+                >
+                  <ShoppingCart className="w-5 h-5" />
+                  Sepete Ekle
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {filteredProducts.length === 0 && (
+          <div className="text-center py-16 text-gray-500 font-medium">
+            Bu kategoride henüz ürün bulunmamaktadır.
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
+index.css:
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", ui-serif, Georgia, serif;
+  
+  --color-gold: #C5A059;
+  --color-gold-dark: #A88544;
+  --color-ink: #1A1A1A;
+  --color-paper: #F9F8F6;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+}
+
+
+main.tsx:
+import {StrictMode} from 'react';
+import {createRoot} from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);
+
+
+
+pages klasörü altında :
+
+Home.tsx:
+import Hero from '../components/Hero';
+import Features from '../components/Features';
+import Categories from '../components/Categories';
+import ProductGrid from '../components/ProductGrid';
+
+export default function Home() {
+  return (
+    <>
+      <Hero />
+      <Features />
+      <Categories />
+      <ProductGrid />
+    </>
+  );
+}
+
+
+ProductDetail.tsx:
+import { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { ShoppingCart, Heart, ShieldCheck, Truck, ArrowLeft, Star, Ruler, Wrench } from 'lucide-react';
+
+// Mock data for the demo
+const mockProduct = {
+  id: 1,
+  name: 'Ahşap Görünümlü PVC Duvar Paneli',
+  category: 'Duvar Panelleri',
+  price: '245,00 TL',
+  originalPrice: '320,00 TL',
+  imageSrc: 'https://images.unsplash.com/photo-1511401139252-f158d3209c17?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+  images: [
+    'https://images.unsplash.com/photo-1511401139252-f158d3209c17?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+  ],
+  description: 'Doğal ahşap dokusunu birebir yansıtan, suya ve neme dayanıklı birinci sınıf PVC duvar paneli. Lüks mekanlar yaratmak için idealdir. Kolay temizlenir, uzun ömürlüdür ve usta gerektirmeden pratik bir şekilde monte edilebilir. Yaşam alanlarınıza sıcak ve prestijli bir atmosfer katar.',
+  features: [
+    'Suya ve neme %100 dayanıklı',
+    'Kolay ve hızlı montaj imkanı',
+    'Alev almaz, yangına dayanıklı yapı',
+    'Ses ve ısı yalıtımına katkı sağlar',
+    'Antibakteriyel ve kolay temizlenebilir yüzey'
+  ],
+  dimensions: 'En: 20 cm | Boy: 290 cm | Kalınlık: 8 mm',
+  isNew: true,
+  rating: 4.8,
+  reviewCount: 124,
+};
+
+export default function ProductDetail() {
+  const { id } = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const [activeImage, setActiveImage] = useState(0);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  return (
+    <div className="bg-paper min-h-screen py-8 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Breadcrumbs & Back */}
+        <div className="flex items-center justify-between mb-8">
+          <Link to="/" className="inline-flex items-center text-sm font-medium text-gray-500 hover:text-gold transition-colors">
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Ana Sayfaya Dön
+          </Link>
+          <div className="hidden sm:flex items-center text-sm text-gray-400">
+            <Link to="/" className="hover:text-gold transition-colors">Ana Sayfa</Link>
+            <span className="mx-2">/</span>
+            <span className="hover:text-gold transition-colors cursor-pointer">{mockProduct.category}</span>
+            <span className="mx-2">/</span>
+            <span className="text-ink truncate max-w-[200px]">{mockProduct.name}</span>
+          </div>
+        </div>
+
+        <div className="bg-white rounded-sm shadow-xl border border-gray-100 overflow-hidden">
+          <div className="flex flex-col lg:flex-row">
+            
+            {/* Product Images */}
+            <div className="lg:w-1/2 p-6 sm:p-10 border-b lg:border-b-0 lg:border-r border-gray-100">
+              <div className="relative aspect-[4/3] sm:aspect-square rounded-sm overflow-hidden mb-6 bg-gray-50">
+                <img 
+                  src={mockProduct.images[activeImage]} 
+                  alt={mockProduct.name} 
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
+                {mockProduct.isNew && (
+                  <div className="absolute top-4 left-4 bg-gold text-white text-xs font-bold px-4 py-2 uppercase tracking-widest rounded-sm shadow-md">
+                    Yeni Sezon
+                  </div>
+                )}
+              </div>
+              <div className="grid grid-cols-3 gap-4">
+                {mockProduct.images.map((img, idx) => (
+                  <button 
+                    key={idx} 
+                    onClick={() => setActiveImage(idx)}
+                    className={`relative aspect-square rounded-sm overflow-hidden border-2 transition-all ${activeImage === idx ? 'border-gold opacity-100' : 'border-transparent opacity-60 hover:opacity-100'}`}
+                  >
+                    <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Product Info */}
+            <div className="lg:w-1/2 p-6 sm:p-10 flex flex-col">
+              <div className="mb-2 flex items-center justify-between">
+                <span className="text-gold font-medium tracking-widest uppercase text-xs">{mockProduct.category}</span>
+                <div className="flex items-center gap-1">
+                  <Star className="w-4 h-4 text-gold fill-gold" />
+                  <span className="text-sm font-medium text-ink">{mockProduct.rating}</span>
+                  <span className="text-sm text-gray-400">({mockProduct.reviewCount} Değerlendirme)</span>
+                </div>
+              </div>
+              
+              <h1 className="text-3xl sm:text-4xl font-display font-bold text-ink leading-tight mb-4">
+                {mockProduct.name}
+              </h1>
+              
+              <div className="flex items-end gap-4 mb-8">
+                <span className="text-4xl font-bold text-ink">{mockProduct.price}</span>
+                <span className="text-lg text-gray-400 line-through mb-1">{mockProduct.originalPrice}</span>
+              </div>
+
+              <p className="text-gray-600 font-light leading-relaxed mb-8">
+                {mockProduct.description}
+              </p>
+
+              {/* Dimensions */}
+              <div className="bg-paper border border-gray-200 rounded-sm p-4 mb-8 flex items-center gap-4">
+                <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm">
+                  <Ruler className="w-5 h-5 text-gold" />
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-1">Ölçüler</h4>
+                  <p className="text-sm font-medium text-ink">{mockProduct.dimensions}</p>
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex flex-col sm:flex-row gap-4 mb-10">
+                <div className="flex items-center border border-gray-300 rounded-sm bg-white h-14 w-full sm:w-32">
+                  <button 
+                    onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                    className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-ink transition-colors"
+                  >
+                    -
+                  </button>
+                  <input 
+                    type="number" 
+                    value={quantity} 
+                    onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                    className="w-full h-full text-center font-bold text-ink bg-transparent focus:outline-none"
+                  />
+                  <button 
+                    onClick={() => setQuantity(quantity + 1)}
+                    className="w-10 h-full flex items-center justify-center text-gray-500 hover:text-ink transition-colors"
+                  >
+                    +
+                  </button>
+                </div>
+                <button className="flex-1 bg-ink hover:bg-gold text-white h-14 rounded-sm font-medium text-lg transition-colors flex items-center justify-center gap-3 shadow-lg">
+                  <ShoppingCart className="w-5 h-5" />
+                  Sepete Ekle
+                </button>
+                <button className="w-14 h-14 flex items-center justify-center border border-gray-300 rounded-sm text-gray-400 hover:text-red-500 hover:border-red-500 transition-colors bg-white">
+                  <Heart className="w-6 h-6" />
+                </button>
+              </div>
+
+              {/* Features List */}
+              <div className="mt-auto border-t border-gray-100 pt-8">
+                <h3 className="font-display font-bold text-lg text-ink mb-4">Ürün Özellikleri</h3>
+                <ul className="space-y-3">
+                  {mockProduct.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start gap-3 text-sm text-gray-600">
+                      <ShieldCheck className="w-5 h-5 text-gold shrink-0" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        {/* Trust Badges */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-12">
+          <div className="bg-white p-6 rounded-sm border border-gray-100 flex items-center gap-4 shadow-sm">
+            <div className="w-12 h-12 bg-paper rounded-full flex items-center justify-center shrink-0">
+              <Truck className="w-6 h-6 text-gold" />
+            </div>
+            <div>
+              <h4 className="font-bold text-ink text-sm">Ücretsiz Kargo</h4>
+              <p className="text-xs text-gray-500 mt-1">2000 TL üzeri siparişlerde</p>
+            </div>
+          </div>
+          <div className="bg-white p-6 rounded-sm border border-gray-100 flex items-center gap-4 shadow-sm">
+            <div className="w-12 h-12 bg-paper rounded-full flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-6 h-6 text-gold" />
+            </div>
+            <div>
+              <h4 className="font-bold text-ink text-sm">Güvenli Alışveriş</h4>
+              <p className="text-xs text-gray-500 mt-1">256-bit SSL sertifikası</p>
+            </div>
+          </div>
+          <div className="bg-white p-6 rounded-sm border border-gray-100 flex items-center gap-4 shadow-sm">
+            <div className="w-12 h-12 bg-paper rounded-full flex items-center justify-center shrink-0">
+              <Wrench className="w-6 h-6 text-gold" />
+            </div>
+            <div>
+              <h4 className="font-bold text-ink text-sm">Kolay İade</h4>
+              <p className="text-xs text-gray-500 mt-1">14 gün içinde koşulsuz iade</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}
+
+
+Shop.tsx:
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { ShoppingCart, Filter, ChevronRight } from 'lucide-react';
+
+const allProducts = [
+  {
+    id: 1,
+    name: 'Ahşap Görünümlü PVC Duvar Paneli',
+    category: 'Duvar Panelleri',
+    price: '245,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1511401139252-f158d3209c17?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: true,
+  },
+  {
+    id: 2,
+    name: 'Mermer Desenli UV Panel',
+    category: 'Duvar Panelleri',
+    price: '320,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1600607686527-6fb886090705?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 3,
+    name: 'Antrasit Gri PVC Lambiri',
+    category: 'Lambiri',
+    price: '185,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1615873968403-89e068629265?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 4,
+    name: 'Beyaz Parlak Tavan Paneli',
+    category: 'Tavan Çözümleri',
+    price: '150,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: true,
+  },
+  {
+    id: 5,
+    name: 'Ceviz Desenli Zemin Kaplama',
+    category: 'Zemin Kaplama',
+    price: '410,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 6,
+    name: 'Akustik Ahşap Duvar Paneli',
+    category: 'Duvar Panelleri',
+    price: '550,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: true,
+  },
+  {
+    id: 7,
+    name: 'Siyah Mat PVC Lambiri',
+    category: 'Lambiri',
+    price: '195,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+  {
+    id: 8,
+    name: 'Altın Çıtalı Duvar Paneli',
+    category: 'Duvar Panelleri',
+    price: '380,00 TL',
+    imageSrc: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80',
+    isNew: false,
+  },
+];
+
+const categories = ['Tüm Ürünler', 'Duvar Panelleri', 'Lambiri', 'Zemin Kaplama', 'Tavan Çözümleri'];
+
+export default function Shop() {
+  const [activeCategory, setActiveCategory] = useState('Tüm Ürünler');
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const filteredProducts = activeCategory === 'Tüm Ürünler' 
+    ? allProducts 
+    : allProducts.filter(p => p.category === activeCategory);
+
+  return (
+    <div className="bg-paper min-h-screen py-8 sm:py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Breadcrumbs */}
+        <div className="flex items-center text-sm text-gray-400 mb-8">
+          <Link to="/" className="hover:text-gold transition-colors">Ana Sayfa</Link>
+          <ChevronRight className="w-4 h-4 mx-2" />
+          <span className="text-ink">Koleksiyonlar</span>
+        </div>
+
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+          {/* Sidebar */}
+          <div className="w-full lg:w-1/4">
+            <div className="bg-white p-6 rounded-sm border border-gray-200 sticky top-32 shadow-sm">
+              <div className="flex items-center gap-2 mb-6 pb-4 border-b border-gray-100">
+                <Filter className="w-5 h-5 text-gold" />
+                <h2 className="font-display font-bold text-lg text-ink">Kategoriler</h2>
+              </div>
+              <ul className="space-y-2">
+                {categories.map(cat => (
+                  <li key={cat}>
+                    <button 
+                      onClick={() => setActiveCategory(cat)}
+                      className={`w-full text-left flex items-center justify-between py-2.5 px-3 rounded-sm text-sm transition-all ${
+                        activeCategory === cat 
+                          ? 'bg-ink text-gold font-medium shadow-md' 
+                          : 'text-gray-600 hover:bg-paper hover:text-ink'
+                      }`}
+                    >
+                      {cat}
+                      {activeCategory === cat && <ChevronRight className="w-4 h-4" />}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Product Grid */}
+          <div className="w-full lg:w-3/4">
+            <div className="mb-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h1 className="text-3xl font-display font-bold text-ink">{activeCategory}</h1>
+              <span className="text-sm text-gray-500 font-medium bg-white px-4 py-2 rounded-sm border border-gray-200 shadow-sm">
+                {filteredProducts.length} ürün listeleniyor
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredProducts.map((product) => (
+                <div key={product.id} className="bg-white border border-gray-200 rounded-sm overflow-hidden hover:shadow-2xl transition-all duration-300 group flex flex-col">
+                  <Link to={`/product/${product.id}`} className="relative aspect-[4/3] bg-gray-100 overflow-hidden block">
+                    <img
+                      src={product.imageSrc}
+                      alt={product.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      referrerPolicy="no-referrer"
+                    />
+                    {product.isNew && (
+                      <div className="absolute top-4 left-4 bg-gold text-white text-[10px] font-bold px-3 py-1.5 uppercase tracking-widest rounded-sm shadow-sm">
+                        Yeni
+                      </div>
+                    )}
+                  </Link>
+                  <div className="p-5 flex flex-col flex-grow text-center">
+                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">{product.category}</p>
+                    <Link to={`/product/${product.id}`} className="hover:text-gold transition-colors">
+                      <h3 className="text-base font-display font-bold text-ink mb-3 line-clamp-2 min-h-[3rem]">
+                        {product.name}
+                      </h3>
+                    </Link>
+                    <div className="mt-auto mb-5">
+                      <span className="text-xl font-bold text-ink">{product.price}</span>
+                    </div>
+                    <button 
+                      onClick={(e) => {
+                        e.preventDefault();
+                      }}
+                      className="w-full bg-paper border border-gray-200 text-ink py-3 rounded-sm font-medium text-sm flex items-center justify-center gap-2 group-hover:bg-gold group-hover:text-white group-hover:border-gold transition-colors"
+                    >
+                      <ShoppingCart className="w-4 h-4" />
+                      Sepete Ekle
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {filteredProducts.length === 0 && (
+              <div className="text-center py-20 text-gray-500 font-medium bg-white border border-gray-200 rounded-sm shadow-sm">
+                Bu kategoride henüz ürün bulunmamaktadır.
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
