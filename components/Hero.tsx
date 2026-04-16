@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="relative flex min-h-[85svh] w-full flex-col items-center justify-center overflow-hidden bg-ink sm:min-h-[600px] lg:min-h-[800px]">
+    <div className="relative flex min-h-[calc(100dvh-120px)] w-full flex-col items-center justify-center overflow-hidden bg-ink sm:min-h-[calc(100dvh-136px)]">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80"

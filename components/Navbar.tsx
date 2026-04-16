@@ -120,52 +120,53 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Mobil Tam Ekran Menü */}
-        <div
-          className={`fixed inset-0 -z-10 flex flex-col bg-white pt-[120px] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] md:hidden ${
-            mobileOpen ? "translate-y-0" : "-translate-y-full"
-          }`}
-        >
-          <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-8">
-            <nav className="flex flex-col pt-4">
-              {[
-                { href: "/", label: "Ana Sayfa" },
-                { href: "/products", label: "Tüm Ürünler" },
-                { href: "/products", label: "Duvar Panelleri" },
-                { href: "/products", label: "Zemin Kaplama" },
-                { href: "/products", label: "Tavan Çözümleri" },
-              ].map((item, i) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="group flex items-center justify-between border-b border-gray-100 py-5 font-display text-2xl font-bold text-ink transition-colors hover:text-gold"
-                  style={{ transitionDelay: `${i * 50}ms` }}
-                >
-                  {item.label}
-                  <ArrowRight className="h-5 w-5 text-gray-300 transition-transform group-hover:translate-x-2 group-hover:text-gold" />
-                </Link>
-              ))}
-            </nav>
-            <div className="mt-auto flex flex-col gap-3 pt-10">
-              <button
-                type="button"
-                className="flex w-full items-center justify-center gap-3 rounded-sm border border-gray-200 bg-paper py-4 text-base font-medium text-ink transition-colors hover:border-gold hover:bg-gold hover:text-white"
+      </header>
+
+      {/* Mobil Tam Ekran Menü */}
+      <div
+        className={`fixed inset-0 z-[90] flex flex-col bg-white pt-[120px] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:pt-[136px] md:hidden ${
+          mobileOpen ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="flex flex-1 flex-col overflow-y-auto px-6 pb-8">
+          <nav className="flex flex-col pt-2 sm:pt-4">
+            {[
+              { href: "/", label: "Ana Sayfa" },
+              { href: "/products", label: "Tüm Ürünler" },
+              { href: "/products", label: "Duvar Panelleri" },
+              { href: "/products", label: "Zemin Kaplama" },
+              { href: "/products", label: "Tavan Çözümleri" },
+            ].map((item, i) => (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className="group flex items-center justify-between border-b border-gray-100 py-4 font-display text-2xl font-bold text-ink transition-colors hover:text-gold sm:py-5"
+                style={{ transitionDelay: `${i * 50}ms` }}
               >
-                <Search className="h-5 w-5 shrink-0" />
-                Ürün Ara
-              </button>
-              <button
-                type="button"
-                className="flex w-full items-center justify-center gap-3 rounded-sm border border-ink bg-ink py-4 text-base font-medium text-white transition-colors hover:border-gold hover:bg-gold"
-              >
-                <User className="h-5 w-5 shrink-0" />
-                Giriş Yap / Üye Ol
-              </button>
-            </div>
+                {item.label}
+                <ArrowRight className="h-5 w-5 text-gray-300 transition-transform group-hover:translate-x-2 group-hover:text-gold" />
+              </Link>
+            ))}
+          </nav>
+          <div className="mt-auto flex flex-col gap-3 pt-8 sm:pt-10">
+            <button
+              type="button"
+              className="flex w-full items-center justify-center gap-3 rounded-sm border border-gray-200 bg-paper py-4 text-base font-medium text-ink transition-colors hover:border-gold hover:bg-gold hover:text-white"
+            >
+              <Search className="h-5 w-5 shrink-0" />
+              Ürün Ara
+            </button>
+            <button
+              type="button"
+              className="flex w-full items-center justify-center gap-3 rounded-sm border border-ink bg-ink py-4 text-base font-medium text-white transition-colors hover:border-gold hover:bg-gold"
+            >
+              <User className="h-5 w-5 shrink-0" />
+              Giriş Yap / Üye Ol
+            </button>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Fixed header yüksekliğini doldurmak için boşluk */}
       <div className="h-[120px] sm:h-[136px]" />
